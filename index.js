@@ -14,9 +14,11 @@ const server = http.createServer((request, response) => {
     const path = url.pathname;
     const trimmedPath = path.replace(/^\/+|\/+$/g,'');
 
+    const method = request.method.toLowerCase();
+
     response.end('Hello World');
 
-    console.log(`Got request on ${trimmedPath}`);
+    console.log(`Got request on ${trimmedPath} with method ${method}`);
 });
 
 server.listen(3000, () => {
