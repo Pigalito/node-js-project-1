@@ -7,6 +7,8 @@
 const http = require('http');
 const { URL } = require('url');
 
+const urlFunctions = require('./lib/urlFunctions');
+
 const server = http.createServer((request, response) => {
     // request.url is relative so need a dummy base. Will throw error otherwise
     const url = new URL(request.url, 'http://example.com');
@@ -16,9 +18,11 @@ const server = http.createServer((request, response) => {
 
     const method = request.method.toLowerCase();
 
+    const querystringParams = urlFunctions.convertSearchParamsToObject(url.searchParams);
+
     response.end('Hello World');
 
-    console.log(`Got request on ${trimmedPath} with method ${method}`);
+    console.log(`Got request on ${trimmedPath} with method ${method} with params ${JSON.stringify(querystringParams)}`);
 });
 
 server.listen(3000, () => {
