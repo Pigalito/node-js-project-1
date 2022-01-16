@@ -18,6 +18,7 @@ const server = http.createServer((request, response) => {
 
     const method = request.method.toLowerCase();
 
+    //TODO change to using querystring for this, it's just easier
     const querystringParams = urlFunctions.convertSearchParamsToObject(url.searchParams);
 
     response.end('Hello World');
